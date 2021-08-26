@@ -5,12 +5,17 @@
  */
 package edu.eci.arsw.blueprints.persistence;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+
 import edu.eci.arsw.blueprints.model.Blueprint;
 
 /**
  *
  * @author hcadavid
  */
+@Service
+@Qualifier("Persistence")
 public interface BlueprintsPersistence {
     
     /**
