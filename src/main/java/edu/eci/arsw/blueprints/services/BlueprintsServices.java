@@ -8,10 +8,12 @@ package edu.eci.arsw.blueprints.services;
 import edu.eci.arsw.blueprints.model.Blueprint;
 import edu.eci.arsw.blueprints.model.Point;
 import edu.eci.arsw.blueprints.persistence.BlueprintNotFoundException;
+import edu.eci.arsw.blueprints.persistence.BlueprintPersistenceException;
 import edu.eci.arsw.blueprints.persistence.BlueprintsPersistence;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.HashSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -27,12 +29,23 @@ public class BlueprintsServices {
 	@Qualifier("InMemoryBlueprint")
     BlueprintsPersistence bpp;
     
-    public void addNewBlueprint(Blueprint bp){
-        
+    /**
+     * 
+     * @param bp the new blueprint
+     * @throws BlueprintPersistenceException if a blueprint with the same name already exists,
+     *    or any other low-level persistence error occurs.
+     */
+    public void addNewBlueprint(Blueprint bp) throws BlueprintPersistenceException{
+        bpp.saveBlueprint(bp);
     }
     
+    /**
+     * 
+     * @return All the blueprints
+     * @throws BlueprintNotFoundException if there is no blueprints
+     */
     public Set<Blueprint> getAllBlueprints(){
-        return null;
+        return bpp.getAllBlueprints();
     }
     
     /**
@@ -43,7 +56,7 @@ public class BlueprintsServices {
      * @throws BlueprintNotFoundException if there is no such blueprint
      */
     public Blueprint getBlueprint(String author,String name) throws BlueprintNotFoundException{
-        throw new UnsupportedOperationException("Not supported yet."); 
+        return bpp.getBlueprint(author, name);
     }
     
     /**
@@ -53,7 +66,6 @@ public class BlueprintsServices {
      * @throws BlueprintNotFoundException if the given author doesn't exist
      */
     public Set<Blueprint> getBlueprintsByAuthor(String author) throws BlueprintNotFoundException{
-        throw new UnsupportedOperationException("Not supported yet."); 
+        return bpp.getBlueprintsByAuthor(author);
     }
-    
 }

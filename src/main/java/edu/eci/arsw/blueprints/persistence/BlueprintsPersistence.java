@@ -5,6 +5,9 @@
  */
 package edu.eci.arsw.blueprints.persistence;
 
+import java.util.Map;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +17,6 @@ import edu.eci.arsw.blueprints.model.Blueprint;
  *
  * @author hcadavid
  */
-@Service
-@Qualifier("Persistence")
 public interface BlueprintsPersistence {
     
     /**
@@ -29,10 +30,21 @@ public interface BlueprintsPersistence {
     /**
      * 
      * @param author blueprint's author
-     * @param bprintname blueprint's author
+     * @param bprintname blueprint's name
      * @return the blueprint of the given name and author
      * @throws BlueprintNotFoundException if there is no such blueprint
      */
     public Blueprint getBlueprint(String author,String bprintname) throws BlueprintNotFoundException;
-    
+
+    /**
+     * @return All the blueprints
+     */
+    public Set<Blueprint> getAllBlueprints();
+
+    /**
+     * 
+     * @return All the blueprint by one author
+     * @throws BlueprintNotFoundException
+     */
+    public Set<Blueprint> getBlueprintsByAuthor(String author) throws BlueprintNotFoundException;
 }
