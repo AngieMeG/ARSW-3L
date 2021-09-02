@@ -27,18 +27,27 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 @Service
 public class BlueprintsServices {
-   
+
     @Autowired
+    @Qualifier("AnotherBlueprint")
     BlueprintsPersistence bpp = null;
 
     @Autowired
     @Qualifier("SubsampleFilter")
     BlueprintsFilter bpf = null;
     
-    public void addNewBlueprint(Blueprint bp){}
+    /**
+     * 
+     * @param bp the new blueprint
+     * @throws BlueprintPersistenceException if a blueprint with the same name already exists,
+     *    or any other low-level persistence error occurs.
+     */
+    public void addNewBlueprint(Blueprint bp) throws BlueprintPersistenceException{
+        bpp.saveBlueprint(bp);
+    }
     
     /**
-     * Returns all the blueprints
+     * @returns all the blueprints
      * @return all the blueprints
      */
     public Set<Blueprint> getAllBlueprints(){
@@ -79,8 +88,8 @@ public class BlueprintsServices {
         ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
         BlueprintsServices bps = ac.getBean(BlueprintsServices.class);
         Point[] pts=new Point[]{new Point(1, 1), new Point(1, 1), new Point(2, 2),
-             new Point(3, 3), new Point(3, 3), new Point(4, 4),
-             new Point(5, 5), new Point(6, 6), new Point(7, 7)};
+            new Point(3, 3), new Point(3, 3), new Point(4, 4),
+            new Point(5, 5), new Point(6, 6), new Point(7, 7)};
 
         try {
             bps.saveBlueprint(new Blueprint("Jose", "Test01",pts));
