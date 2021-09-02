@@ -14,7 +14,7 @@ public class SubsampleFilter extends BlueprintsFilter{
 
     @Override
     public String getFilterDescription() {
-        return null;
+        return "Removes 1 of each 2 points in the blueprint, in an interleaved way.";
     }
 
     @Override

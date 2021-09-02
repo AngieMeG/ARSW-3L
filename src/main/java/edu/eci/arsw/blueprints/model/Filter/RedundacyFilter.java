@@ -14,7 +14,7 @@ public class RedundacyFilter extends BlueprintsFilter{
 
     @Override
     public String getFilterDescription() {
-        return null;
+        return "Removes all consecutively repeated points from the blueprint.";
     }
 
     @Override

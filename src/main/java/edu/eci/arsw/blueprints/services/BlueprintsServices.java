@@ -85,8 +85,9 @@ public class BlueprintsServices {
         try {
             bps.saveBlueprint(new Blueprint("Jose", "Test01",pts));
             bps.saveBlueprint(new Blueprint("Jose", "Test02",pts));
-            System.out.println(bps.getBlueprint("Jose","Test01")); //Blueprint{author=Jose, name=Test01}
-            System.out.println(bps.getBlueprintsByAuthor("Jose")); //[Blueprint{author=Jose, name=Test01}, Blueprint{author=Jose, name=Test02}, Blueprint{author=Jose, name=Test03}]
+            bps.saveBlueprint(new Blueprint("Jose", "Test03",pts));
+            System.out.println(bps.getBlueprint("Jose","Test01")); 
+            System.out.println(bps.getBlueprintsByAuthor("Jose"));
         } catch (Exception e) {e.printStackTrace();}
         
     }
